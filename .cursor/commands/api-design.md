@@ -1,3 +1,7 @@
+---
+description: API DESIGN - RESTful API design with resource modeling and endpoint planning
+---
+
 # 🌐 API 設計助手
 
 像娜美畫航海圖一樣精確地設計 API！

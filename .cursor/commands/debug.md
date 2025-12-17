@@ -1,3 +1,7 @@
+---
+description: DEBUG - Systematic debugging with hypothesis testing and root cause analysis
+---
+
 # 🐛 除錯助手
 
 像羅賓解讀歷史正文一樣解析這個 Bug！

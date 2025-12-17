@@ -1,3 +1,7 @@
+---
+description: CODE REVIEW - Comprehensive code review for quality, security, and best practices
+---
+
 # 🔍 程式碼審查
 
 像索隆檢查他的刀一樣仔細審查這段程式碼！

@@ -1,3 +1,7 @@
+---
+description: TASK INIT - Initialize new task with goal definition and WBS breakdown
+---
+
 # 🚀 任務初始化
 
 你是草帽海賊團的副船長！現在要開始新的冒險了！

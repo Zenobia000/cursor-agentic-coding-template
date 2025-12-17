@@ -1,3 +1,7 @@
+---
+description: WRITE TESTS - Test strategy and implementation for unit, integration, and E2E tests
+---
+
 # 🧪 測試撰寫
 
 像烏索普的彈弓一樣精準的測試！

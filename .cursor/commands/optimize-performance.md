@@ -1,3 +1,7 @@
+---
+description: OPTIMIZE - Performance analysis and optimization for frontend and backend
+---
+
 # ⚡ 效能優化
 
 像索隆的三刀流一樣快速！讓程式碼跑得飛快！
