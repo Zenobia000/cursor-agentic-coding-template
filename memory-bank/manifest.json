@@ -1,0 +1,47 @@
+{
+  "description": "Manifest for the Memory Bank, providing a comprehensive overview of all core files, their purpose, and their structural schemas. This serves as a central reference for AI Agents and human collaborators.",
+  "files": [
+    {
+      "name": "activeContext.md",
+      "path": "memory-bank/current/activeContext.md",
+      "purpose": "Tracks the AI Agent's current operational phase and specific focus within the project. It's a dynamic snapshot of the active state.",
+      "schema": "memory-bank/schemas/activeContext.schema.md"
+    },
+    {
+      "name": "progress.md",
+      "path": "memory-bank/current/progress.md",
+      "purpose": "Detailed log of implementation activities, progress, and any blockers encountered during the current work cycle.",
+      "schema": "memory-bank/schemas/progress.schema.md"
+    },
+    {
+      "name": "projectbrief.md",
+      "path": "memory-bank/current/projectbrief.md",
+      "purpose": "Overarching high-level vision, goals, and scope for the entire project. Serves as the strategic guiding document.",
+      "schema": "memory-bank/schemas/projectbrief.schema.md"
+    },
+    {
+      "name": "runbook.md",
+      "path": "memory-bank/current/runbook.md",
+      "purpose": "Operational procedures and troubleshooting guides for maintaining and supporting the application.",
+      "schema": "memory-bank/schemas/runbook.schema.md"
+    },
+    {
+      "name": "systemPatterns.md",
+      "path": "memory-bank/current/systemPatterns.md",
+      "purpose": "Documents fundamental architectural patterns and key system-wide design decisions applied across the project.",
+      "schema": "memory-bank/schemas/systemPatterns.schema.md"
+    },
+    {
+      "name": "tasks.md",
+      "path": "memory-bank/current/tasks.md",
+      "purpose": "The single source of truth for all planned, in-progress, and completed work. Follows a Work Breakdown Structure.",
+      "schema": "memory-bank/schemas/tasks.schema.md"
+    },
+    {
+      "name": "techContext.md",
+      "path": "memory-bank/current/techContext.md",
+      "purpose": "Detailed overview of the technical environment, technology stack, and key tools used in the project.",
+      "schema": "memory-bank/schemas/techContext.schema.md"
+    }
+  ]
+}
