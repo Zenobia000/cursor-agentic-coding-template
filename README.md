@@ -4,6 +4,26 @@
 
 本框架旨在解決 AI 在大型專案中「說過就忘」、「缺乏規劃」、「無法遵循團隊規範」的核心痛點。它將您的 AI 助手從一個 stateless 的問答機器，升級為一個有記憶、有原則、有思想的**專案核心成員**。
 
+## 🚀 Cursor 導入與使用：開啟智能協作之旅
+
+為了最大化本框架的效能，建議您將本專案導入 [Cursor IDE](https://www.cursor.sh/)。Cursor IDE 提供原生支持自訂斜線指令（Custom Slash Commands）和規則（Rules）的環境，讓 AI Agent 得以完美運行。
+
+### 步驟指引：
+
+1.  **克隆專案:**
+    首先，請將本專案克隆到您的本地電腦：
+    ```bash
+    git clone https://github.com/Zenobia000/cursor-agentic-coding-template.git
+    ```
+2.  **使用 Cursor 開啟專案:**
+    開啟 Cursor IDE，然後選擇 `File > Open Folder` (或 `Open Project`)，導航至您剛才克隆的 `cursor-agentic-coding-template` 目錄並開啟它。
+3.  **確認指令啟用:**
+    一旦專案在 Cursor 中開啟，您可以在 Cursor 的 AI Chat 中輸入 `/`，應該會看到本框架提供的所有自訂指令列表（例如 `/van`, `/plan` 等）。如果沒有看到，請檢查 Cursor 版本是否為最新，並確保自訂指令功能已啟用。
+4.  **開始您的第一個任務:**
+    在 Cursor 的 AI Chat 中輸入 `/van`，啟動專案初始化流程，AI Agent 會引導您完成後續設置。
+
+---
+
 ## 🚀 核心價值：打造您的專屬 AI 開發團隊
 
 使用本框架，您可以：
