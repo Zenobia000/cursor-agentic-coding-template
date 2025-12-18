@@ -1,5 +1,5 @@
 ---
-description: "🧪 烏索普的精準測試規則！每一發都要命中目標！"
+description: Defines the project's testing strategy, including the testing pyramid, TDD/BDD methodology, and code coverage standards.
 globs:
   - "**/*.test.ts"
   - "**/*.test.js"

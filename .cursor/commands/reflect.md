@@ -1,206 +1,72 @@
 ---
-description: REFLECT MODE - Task review, retrospective, and lessons learned
+description: REFLECT MODE - Retrospective analysis in the `current` workspace for lesson learning.
 ---
 
-# 🔍 REFLECT MODE - Task Review
+# 🔍 REFLECT MODE (v3)
 
-## Prerequisites Check
+> 從已完成的工作中汲取經驗，提煉智慧，為未來的成功鋪路。
 
-Before entering REFLECT MODE, verify:
-- ✅ Memory Bank exists
-- ✅ `tasks.md` has completed tasks
-- ✅ `progress.md` shows implementation history
-- ✅ Implementation phase is complete
+## 1. PLAN 🎯 (規劃)
 
-If prerequisites are not met:
-```
-⚠️ Required files not in expected state
-Please return to /implement mode to complete implementation
-```
+### Objective
+> 對一個已完成的開發週期進行全面的、數據驅動的回顧，總結成果，反思過程，並將所有學習到的經驗**寫入**一份新的 `memory-bank/current/reflection-[date].md` 文件中，作為未來改進的基礎。
 
-## Core Responsibilities
+### Guiding Rules
+> 在執行此指令時，AI Agent 必須遵循以下規則：
+- **主要規則:** `.cursor/rules/principles/global.mdc`
+- **流程改進:** `.cursor/rules/process/planning-process.md`
+- **核心隔離:** `.cursor/rules/isolation_rules/main.mdc`
 
-1. **Review Implementation**
-   - Read `tasks.md` for completed tasks
-   - Read `progress.md` for implementation details
-   - Analyze what was accomplished
+### Prerequisites Check
+> 在開始反思之前，請確保：
+- ✅ **週期已結束:** `memory-bank/current/tasks.md` 中絕大多數任務都已標記為 `completed`。
+- ✅ **歷史記錄存在:** `memory-bank/current/progress.md` 文件存在，並包含了本週期的開發日誌。
+- ❌ **Failure Action:** 如果工作尚未完成，AI **必須拒絕**反思，並建議：「看起來本週期還有未完成的任務。建議先完成它們再進行反思。」
 
-2. **Retrospective Analysis**
-   - What went well?
-   - What could be improved?
-   - What did we learn?
-   - What should we do differently next time?
+## 2. DO 実行 (執行)
 
-3. **Update Documentation**
-   - Update `tasks.md` with final status
-   - Add lessons learned
-   - Document technical debt
-   - Identify future improvements
+### Core Process
+> 遵循一個客觀、公正、面向未來的復盤框架：
 
-## Reflection Framework
+**Step 0: 健康檢查 (Health Check)**
+- **檢查拓撲完整性:** 驗證 `memory-bank/current/` 中的 `tasks.md` 和 `progress.md` 的數據是否完整且可以互相印證。
+- **批判性思考:** 反思的目的是為了改進，而非指責。AI 在分析時應採取中立的語氣。如果發現某個任務延遲嚴重，應客觀描述事實，並探討原因。
 
-### 1. Accomplishment Review
-```markdown
-## What We Built
-- Feature A: Description and impact
-- Feature B: Description and impact
-- Feature C: Description and impact
+**Step 1: 記憶體互動 - 讀取 (Memory Interaction - Read)**
+- **讀取所有相關記憶:**
+    - `memory-bank/current/tasks.md` (規劃了什麼)
+    - `memory-bank/current/progress.md` (實際執行過程)
+    - `memory-bank/current/creative-*.md` (設計決策)
+    - `git log` (提交歷史)
+- **綜合分析:** 將上述所有資訊結合起來，建立一個關於本週期的完整畫像。
 
-## Metrics
-- Tasks Completed: X/Y
-- Code Coverage: Z%
-- Performance: Within/Outside targets
-- Technical Debt: Low/Medium/High
-```
+**Step 2: 復盤分析 (Retrospective Analysis)**
+- **客觀總結 (What happened?):** 總結完成了哪些主要功能，指標數據如何。
+- **分析亮點 (What went well?):** 識別流程中的成功實踐、高效決策。
+- **分析痛點 (What could be improved?):** 識別流程中的瓶頸、錯誤的估算、技術債。
+- **提煉學習 (What did we learn?):** 總結出可供未來直接使用的、可操作的經驗教訓。
 
-### 2. Process Reflection
-```markdown
-## What Went Well 👍
-- Effective design phase prevented rework
-- Clear task breakdown made implementation smooth
-- Good communication on blockers
+**Step 3: 記憶體互動 - 寫入 (Memory Interaction - Write)**
+- **創建反思報告:** 將上述所有分析結果，**寫入**到一個**新的** `memory-bank/current/reflection-[date].md` 文件中。
+- **(可選) 更新任務列表:** 如果在反思中識別出新的技術債務，可以**更新** `memory-bank/current/tasks.md`，將這些技債作為下個週期的 PENDING 任務。
 
-## What Could Be Improved 🔧
-- Better estimation needed for complex tasks
-- More frequent testing would catch issues earlier
-- Design decisions needed earlier stakeholder input
+## 3. CHECK ✓ (檢查)
 
-## Surprises/Learnings 💡
-- Technology X was easier to integrate than expected
-- Performance bottleneck in unexpected area
-- New pattern learned: [pattern name]
-```
+### Verification Checklist
+- [ ] **報告已生成:** `memory-bank/current/reflection-[date].md` 是否已成功創建？
+- [ ] **分析是否深入:** 報告是否不僅僅是羅列事實，而是提供了對原因的深入分析？
+- [ ] **學習是否可操作:** 總結的經驗教訓是否具體、可衡量、可應用？
 
-### 3. Technical Debt Tracking
-```markdown
-## Technical Debt Identified
-1. **Debt Item**: Quick fix in module X
-   - **Impact**: Medium
-   - **Effort to Fix**: 2 days
-   - **Priority**: Should address in next sprint
+## 4. ACT 改善 (行動)
 
-2. **Debt Item**: Missing test coverage in area Y
-   - **Impact**: High
-   - **Effort to Fix**: 3 days
-   - **Priority**: Must fix before next release
-```
+### Finalization
+- **與用戶互動:** 在生成報告後，AI 可以主動向用戶提問，以獲取更深層次的見解。例如：「報告已生成。從您個人的角度來看，本次週期最大的挑戰是什麼？」
+- **提交報告:** 將最終的 `reflection-[date].md` 文件提交到版本控制系統。
 
-### 4. Future Improvements
-```markdown
-## Recommendations for Next Phase
-1. **Process**: Implement daily standups
-2. **Technical**: Refactor module X for better maintainability
-3. **Testing**: Add integration tests for critical paths
-4. **Documentation**: Create API usage examples
-```
-
-## Reflection Template
-
-```markdown
-# Reflection: [Sprint/Phase Name]
-
-**Date**: YYYY-MM-DD
-**Phase**: REFLECT MODE
-**Duration**: [Start Date] to [End Date]
-
-## Summary
-Brief overview of what was accomplished
-
-## Accomplishments
-- [x] Major achievement 1
-- [x] Major achievement 2
-- [x] Major achievement 3
-
-## Metrics
-- **Planned Tasks**: X
-- **Completed Tasks**: Y (Z%)
-- **Blocked Tasks**: N
-- **Average Task Duration**: X hours/days
-
-## Retrospective
-
-### What Went Well
-1. Point 1
-2. Point 2
-3. Point 3
-
-### What Could Be Improved
-1. Point 1 - Suggested improvement
-2. Point 2 - Suggested improvement
-3. Point 3 - Suggested improvement
-
-### Key Learnings
-1. Learning 1
-2. Learning 2
-3. Learning 3
-
-## Technical Debt
-- Debt item 1 (Priority: High/Medium/Low)
-- Debt item 2 (Priority: High/Medium/Low)
-
-## Action Items for Next Phase
-- [ ] Action 1
-- [ ] Action 2
-- [ ] Action 3
-
-## Notes
-Additional observations and context
-```
-
-## Quality Assessment
-
-### Code Quality
-- [ ] Follows coding standards
-- [ ] Well-documented
-- [ ] Properly tested
-- [ ] Performance optimized
-- [ ] Security considerations addressed
-
-### Process Quality
-- [ ] Tasks were well-defined
-- [ ] Estimates were accurate
-- [ ] Communication was effective
-- [ ] Blockers were resolved quickly
-- [ ] Documentation kept current
-
-## Rules Loaded
-
-This mode loads:
-- `.cursor/rules/isolation_rules/main.mdc`
-- `.cursor/rules/isolation_rules/Core/reflection-format.md` (if exists)
-
-## File Operations
-
-### Read
-- `memory-bank/tasks.md` - Completed tasks
-- `memory-bank/progress.md` - Implementation history
-- `memory-bank/creative-*.md` - Design decisions
-
-### Update
-- `memory-bank/tasks.md` - Final status and lessons
-- `memory-bank/activeContext.md` - Update phase to REFLECT MODE
-
-### Create
-- `memory-bank/reflection-[date].md` - Retrospective document
-
-## Exit Criteria
-
-Before completing REFLECT MODE:
-- ✅ All completed tasks reviewed
-- ✅ Retrospective completed
-- ✅ Lessons learned documented
-- ✅ Technical debt identified and prioritized
-- ✅ Recommendations for next phase documented
-- ✅ Reflection document created
-
-## Next Mode
-
-After completing reflection:
-```
-Phase complete. NEXT MODE: /archive
-```
+### Next Steps
+> 反思是為了更好地前進。
+- 👉 **Primary Next Step:** 執行 `/archive` 指令，將本週期的所有工作成果整理歸檔。
+- 💡 **Alternative:** 如果反思中發現了需要立即修復的嚴重技術債，可以執行 `/task-init` 和 `/implement`，在開始新週期之前先償還債務。
 
 ---
-
-**🔍 REFLECT MODE activated. Beginning task review and retrospective analysis...**
-
+> **REFLECT MODE (v3) 已啟動。正在檢查 `current` 工作區的週期完整性，準備進行復盤分析...**

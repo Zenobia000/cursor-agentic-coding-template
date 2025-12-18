@@ -1,13 +1,5 @@
 ---
-description: "🤖 弗蘭奇的AI規則！SUPER智慧系統！"
-globs:
-  - "ai/**/*"
-  - "src/ai/**/*"
-  - "lib/ai/**/*"
-  - "agents/**/*"
-  - "prompts/**/*"
-  - "*.prompt.ts"
-  - "*.agent.ts"
+description: Defines the core personality, tone, and behavioral guidelines for the AI agent.
 ---
 
 # 🧠 AI 系統架構

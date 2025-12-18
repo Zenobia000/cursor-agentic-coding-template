@@ -1,5 +1,5 @@
 ---
-description: "🚢 弗蘭奇的超級部署系統！SUPER 可靠的上線流程！"
+description: Provides a checklist and standard operating procedures for deploying the application to production.
 applyIntelligently: true
 globs:
   - "deploy/**/*"

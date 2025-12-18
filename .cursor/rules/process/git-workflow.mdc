@@ -1,7 +1,5 @@
 ---
-description: "🗡️ 三刀流 Git 工作流程！像索隆一樣精準的版本控制！"
-alwaysApply: false
-applyIntelligently: true
+description: Specifies the Git branching model, commit message conventions, and the pull request process.
 ---
 
 # 🌊 Git 分支策略

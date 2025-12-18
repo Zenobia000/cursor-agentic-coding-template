@@ -1,5 +1,5 @@
 ---
-description: "🏴‍☠️ 草帽海賊團の鐵律！違反者餵海王類！"
+description: Contains project-wide coding standards, formatting rules, and linting configurations that apply to all code.
 alwaysApply: true
 ---
 

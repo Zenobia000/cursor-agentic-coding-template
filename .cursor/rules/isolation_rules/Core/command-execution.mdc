@@ -1,3 +1,6 @@
+---
+description: Provides low-level guidelines and safety constraints for executing shell commands.
+---
 # COMMAND EXECUTION SYSTEM
 
 > **TL;DR:** This system provides guidelines for efficient command execution, balancing clarity and token optimization through appropriate command chaining, with proper documentation of commands and results.

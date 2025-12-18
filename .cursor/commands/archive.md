@@ -1,285 +1,65 @@
 ---
-description: ARCHIVE MODE - Documentation, cleanup, and knowledge preservation
+description: ARCHIVE MODE - Archives the `current` workspace to preserve a completed work cycle.
 ---
 
-# 📚 ARCHIVE MODE - Documentation
+# 📚 ARCHIVE MODE (v3)
 
-## Prerequisites Check
+> 封存當前週期的知識與成果，為未來鋪路，確保沒有任何智慧被遺忘。
 
-Before entering ARCHIVE MODE, verify:
-- ✅ Memory Bank exists
-- ✅ `tasks.md` shows completed work
-- ✅ `progress.md` documents implementation
-- ✅ Reflection completed (from REFLECT MODE)
+## 1. PLAN 🎯 (規劃)
 
-If prerequisites are not met:
-```
-⚠️ Required files not in expected state
-Please return to /reflect mode to complete retrospective
-```
+### Objective
+> 將一個已完成開發週期的所有工作成果 (即 `memory-bank/current/` 中的所有內容) 進行結構化歸檔，並清理工作區，為下一個週期的乾淨啟動做準備。
 
-## Core Responsibilities
+### Guiding Rules
+> 在執行此指令時，AI Agent 必須遵循以下規則：
+- **主要規則:** `.cursor/rules/principles/global.mdc`
+- **Git 工作流:** `.cursor/rules/process/git-workflow.mdc`
+- **核心隔離:** `.cursor/rules/isolation_rules/main.mdc`
 
-1. **Documentation Finalization**
-   - Create/update README
-   - Write API documentation
-   - Document configuration
-   - Create user guides
-   - Update changelog
+### Prerequisites Check
+> 在開始封存之前，請確保：
+- ✅ **實作已完成:** `memory-bank/current/tasks.md` 中絕大多數任務都已標記為 `completed`。
+- ✅ **反思已完成:** 一個對應的 `reflection-*.md` 文件已存在於 `memory-bank/current/` 中。
+- ❌ **Failure Action:** 如果任務未完成或反思不存在，AI **必須拒絕封存**，並建議用戶先執行 `/implement` 或 `/reflect`。
 
-2. **Knowledge Preservation**
-   - Archive design decisions
-   - Preserve implementation notes
-   - Document workarounds and gotchas
-   - Create troubleshooting guides
+## 2. DO 実行 (執行)
 
-3. **Cleanup & Organization**
-   - Organize Memory Bank files
-   - Archive completed work
-   - Clean up temporary files
-   - Organize code comments
+### Core Process
+> 遵循一個嚴謹的、不可逆的封存流程：
 
-4. **Handoff Preparation**
-   - Prepare onboarding docs
-   - Document deployment process
-   - Create maintenance runbook
-   - List known issues and limitations
+**Step 0: 健康檢查 (Health Check)**
+- **檢查拓撲完整性:** 驗證 `memory-bank/current/` 中的 `tasks.md`, `progress.md`, 和 `reflection-*.md` 文件是否存在且狀態一致。
+- **批判性思考:** 封存是一個週期的終點。AI 應檢查是否存在任何「半成品」。如果發現，應向用戶提問並請求確認。
 
-## Documentation Structure
+**Step 1: 文件定稿 (Finalize Documentation)**
+- 基於 `memory-bank/current/reflection-*.md` 的內容，更新 `README.md` 和 `CHANGELOG.md`。
 
-### 1. README.md
-```markdown
-# Project Name
+**Step 2: 記憶體互動 - 讀取與寫入 (Memory Interaction - Read & Write)**
+- **創建封存目錄:** 創建一個新的、以日期命名的封存目錄，例如 `archive/sprint-2025-12-18/`。
+- **複製記憶體:** 將**整個** `memory-bank/current/` 目錄的內容**複製**到新的封存目錄中。
+- **清理工作區:** 在**用戶確認**後，清理 `memory-bank/current/` 中的內容。
 
-## Overview
-Brief description of the project
+**Step 3: 版本控制 (Version Control)**
+- **Git Add:** 將新的 `archive/` 目錄和更新的 `README.md` / `CHANGELOG.md` 添加到 Git 暫存區。
+- **Git Commit:** 創建一個標準化的提交訊息，例如 `chore(project): archive sprint-2025-12-18 work cycle`。
 
-## Features
-- Feature 1: Description
-- Feature 2: Description
+## 3. CHECK ✓ (檢查)
 
-## Installation
-```bash
-# Installation steps
-```
+### Verification Checklist
+- [ ] **封存目錄已創建:** `archive/sprint-..../` 目錄和其內容是否已成功創建？
+- [ ] **記憶體已複製:** 封存目錄中的文件是否與封存前的 `memory-bank/current/` 內容完全一致？
+- [ ] **Git 狀態正確:** `git status` 是否顯示了預期的變更？
 
-## Usage
-```bash
-# Usage examples
-```
+## 4. ACT 改善 (行動)
 
-## Configuration
-Environment variables and configuration options
+### Finalization
+- **向用戶確認:** 在執行清理和提交等不可逆操作**之前**，AI **必須**向用戶請求最終批准。例如：「我已準備好將本次週期的所有成果封存到 `archive/sprint-..../` 並創建一個 Git 提交。**清理工作區並提交後，此操作不可逆。** 是否繼續？」
 
-## Architecture
-High-level architecture overview
-
-## Contributing
-Guidelines for contributors
-
-## License
-License information
-```
-
-### 2. API Documentation
-```markdown
-# API Documentation
-
-## Endpoints
-
-### GET /api/resource
-**Description**: Get resource by ID
-
-**Parameters**:
-- `id` (string, required): Resource identifier
-
-**Response**:
-```json
-{
-  "id": "123",
-  "data": "..."
-}
-```
-
-**Error Codes**:
-- 404: Resource not found
-- 500: Internal server error
-```
-
-### 3. Architecture Documentation
-```markdown
-# Architecture
-
-## System Overview
-[High-level diagram]
-
-## Components
-- Component A: Responsibility and interaction
-- Component B: Responsibility and interaction
-
-## Data Flow
-[Sequence diagrams]
-
-## Design Decisions
-References to creative-*.md files
-
-## Technology Stack
-- Frontend: [Technologies]
-- Backend: [Technologies]
-- Database: [Technologies]
-- Infrastructure: [Technologies]
-```
-
-### 4. Deployment Guide
-```markdown
-# Deployment Guide
-
-## Prerequisites
-- Software X version Y
-- Service A credentials
-- Environment variables
-
-## Steps
-1. Step 1: Description
-2. Step 2: Description
-
-## Verification
-How to verify successful deployment
-
-## Rollback
-How to rollback if needed
-
-## Troubleshooting
-Common issues and solutions
-```
-
-## Archive Structure
-
-Create organized archive:
-```
-docs/
-├── architecture/
-│   ├── design-decisions/
-│   │   ├── creative-001-database.md
-│   │   └── creative-002-api.md
-│   ├── diagrams/
-│   └── adr/  # Architecture Decision Records
-├── api/
-│   ├── endpoints.md
-│   └── examples/
-├── guides/
-│   ├── user-guide.md
-│   ├── developer-guide.md
-│   └── deployment-guide.md
-└── runbooks/
-    ├── maintenance.md
-    ├── troubleshooting.md
-    └── oncall.md
-```
-
-## Archive Checklist
-
-### Documentation
-- [ ] README complete and up-to-date
-- [ ] API documentation written
-- [ ] Architecture documented
-- [ ] Configuration documented
-- [ ] Deployment guide created
-- [ ] User guide created
-- [ ] Developer guide created
-
-### Code Quality
-- [ ] Code comments are clear
-- [ ] Complex logic explained
-- [ ] TODOs documented
-- [ ] Technical debt tracked
-
-### Knowledge Transfer
-- [ ] Design decisions archived
-- [ ] Implementation notes preserved
-- [ ] Lessons learned documented
-- [ ] Known issues listed
-- [ ] Workarounds documented
-
-### Cleanup
-- [ ] Temporary files removed
-- [ ] Debug code removed
-- [ ] Unused dependencies removed
-- [ ] Memory Bank organized
-
-## Memory Bank Archival
-
-### Files to Archive
-```
-archive/
-└── [project-name]-[date]/
-    ├── tasks.md
-    ├── activeContext.md
-    ├── progress.md
-    ├── creative-*.md
-    ├── reflection-*.md
-    └── README.md
-```
-
-### Archival Script
-```bash
-# Create archive directory
-mkdir -p archive/[project-name]-$(date +%Y%m%d)
-
-# Copy Memory Bank files
-cp memory-bank/*.md archive/[project-name]-$(date +%Y%m%d)/
-
-# Create archive summary
-echo "Archive created: $(date)" > archive/[project-name]-$(date +%Y%m%d)/ARCHIVE_INFO.txt
-```
-
-## Rules Loaded
-
-This mode loads:
-- `.cursor/rules/isolation_rules/main.mdc`
-- `.cursor/rules/isolation_rules/Core/archiving-guide.md` (if exists)
-
-## File Operations
-
-### Read
-- `memory-bank/tasks.md` - Completed tasks
-- `memory-bank/progress.md` - Implementation details
-- `memory-bank/creative-*.md` - Design decisions
-- `memory-bank/reflection-*.md` - Retrospective
-
-### Create
-- `docs/` - Documentation directory
-- `README.md` - Project documentation
-- `CHANGELOG.md` - Version history
-- `archive/` - Archived Memory Bank
-
-### Archive
-- Move completed Memory Bank to `archive/`
-- Preserve all creative and reflection documents
-
-## Exit Criteria
-
-Before completing ARCHIVE MODE:
-- ✅ All documentation written and reviewed
-- ✅ Memory Bank files organized and archived
-- ✅ Knowledge successfully transferred
-- ✅ Cleanup completed
-- ✅ Project ready for handoff or next phase
-- ✅ Archive directory created with all artifacts
-
-## Cycle Complete
-
-After completing ARCHIVE MODE:
-```
-✅ Full workflow cycle complete!
-
-You can now:
-- Start a new cycle with /van for next phase
-- Continue maintaining with existing documentation
-- Hand off to another team with complete knowledge base
-```
+### Next Steps
+> 封存完成後，一個完整的週期便告結束。
+- 👉 **Primary Next Step:** 執行 `/van` 指令，重新初始化一個乾淨的 `memory-bank/current` 工作區。
+- 💡 **Alternative:** 將專案移交給維護團隊，並告知他們 `archive/` 目錄是最終的知識庫。
 
 ---
-
-**📚 ARCHIVE MODE activated. Beginning documentation and knowledge preservation...**
-
+> **ARCHIVE MODE (v3) 已啟動。正在檢查 `current` 工作區健康狀態，準備進行週期封存...**

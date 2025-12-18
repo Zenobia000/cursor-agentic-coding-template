@@ -1,183 +1,70 @@
 ---
-description: IMPLEMENT MODE - Code implementation with command execution and progress tracking
+description: IMPLEMENT MODE - Guided, test-driven code implementation in the `current` workspace.
 ---
 
-# 💻 IMPLEMENT MODE - Code Implementation
+# 💻 IMPLEMENT MODE (v3)
 
-## Prerequisites Check
+> 將設計藍圖轉化為功能齊全、經過測試、且高品質的程式碼。
 
-Before entering IMPLEMENT MODE, verify:
-- ✅ Memory Bank exists
-- ✅ `tasks.md` has planned tasks
-- ✅ `creative-*.md` files exist with design decisions
-- ✅ Design decisions are approved
+## 1. PLAN 🎯 (規劃)
 
-If prerequisites are not met:
-```
-⚠️ Required files not in expected state
-Please return to /creative mode to complete design decisions
-```
+### Objective
+> 根據 `tasks.md` 中指定的任務和其關聯的 `creative-*.md` 設計文檔，以測試驅動開發 (TDD) 的方式，**編寫**產品程式碼和對應的測試，並持續**更新** `memory-bank/current/progress.md` 來記錄進度。
 
-## Core Responsibilities
+### Guiding Rules
+> 在執行此指令時，AI Agent 必須遵循以下規則：
+- **主要規則:** `.cursor/rules/principles/global.mdc`
+- **測試優先:** `.cursor/rules/testing/overview.mdc`
+- **程式碼品質:** `.cursor/rules/backend/overview.mdc` 或 `.cursor/rules/frontend/overview.mdc`
+- **指令執行:** `.cursor/rules/isolation_rules/Core/command-execution.mdc`
+- **核心隔離:** `.cursor/rules/isolation_rules/main.mdc`
 
-1. **Read Design & Tasks**
-   - Review `tasks.md` for implementation tasks
-   - Read relevant `creative-*.md` design documents
-   - Understand implementation requirements
+### Prerequisites Check
+> 在開始編碼之前，請確保：
+- ✅ **任務已設計:** `memory-bank/current/tasks.md` 中的當前任務已關聯一個或多個 `creative-*.md` 設計文檔。
+- ✅ **設計已批准:** 相關的設計文檔已被用戶確認。
+- ❌ **Failure Action:** 如果找不到對應的設計文檔，AI **必須拒絕編碼**，並建議用戶先執行 `/creative` 來完成技術設計。
 
-2. **Code Implementation**
-   - Write clean, maintainable code
-   - Follow design patterns from CREATIVE MODE
-   - Implement features according to tasks
-   - Write tests alongside implementation
+## 2. DO 実行 (執行)
 
-3. **Progress Tracking**
-   - Update `progress.md` with implementation status
-   - Update task status in `tasks.md`
-   - Document any implementation deviations
-   - Track blockers and issues
+### Core Process
+> 遵循一個嚴格的、包含健康檢查的測試驅動開發循環：
 
-4. **Command Execution**
-   - Execute platform-appropriate commands
-   - Verify command results
-   - Document commands and their effects
+**Step 0: 健康檢查 (Health Check)**
+- **檢查設計完整性:** 讀取 `tasks.md` 所連結的 `creative-*.md` 文件。驗證設計文檔是否清晰、完整。
+- **批判性思考:** 如果設計文檔含糊不清 (e.g., "然後處理數據")，AI **必須要求更具體的設計細節**。
 
-## Implementation Workflow
+**Step 1: 記憶體互動 - 讀取 (Memory Interaction - Read)**
+- **讀取任務與設計:** 從 `memory-bank/current/tasks.md` 讀取任務要求，從關聯的 `creative-*.md` 讀取詳細的技術設計。
 
-```mermaid
-graph TD
-    Start[Select Task] --> Read[Read Design Docs]
-    Read --> Design[Review Design]
-    Design --> Code[Write Code]
-    Code --> Test[Write Tests]
-    Test --> Verify[Verify Implementation]
-    Verify --> Pass{Tests Pass?}
-    Pass -->|Yes| Update[Update Progress]
-    Pass -->|No| Debug[Debug & Fix]
-    Debug --> Test
-    Update --> Next{More Tasks?}
-    Next -->|Yes| Start
-    Next -->|No| Complete[IMPLEMENT MODE Complete]
-```
+**Step 2: 迭代開發 (Iterative Development)**
+- **遵循 TDD:**
+    1. **寫一個失敗的測試 (Red):** 根據設計，為即將實現的最小功能單元編寫一個測試，並確認它因功能未實現而失敗。
+    2. **寫最少的程式碼讓測試通過 (Green):** 編寫最簡潔的產品程式碼，恰好能讓該測試通過。
+    3. **重構 (Refactor):** 在測試保護下，優化剛才編寫的程式碼。
+- **重複此循環**，直到任務的所有功能點都已實現。
 
-## Command Execution Guidelines
+**Step 3: 記憶體互動 - 寫入與更新 (Memory Interaction - Write & Update)**
+- **寫入產品程式碼:** 在專案的源碼目錄中**創建**或**修改**對應的檔案。
+- **寫入測試程式碼:** 在專案的測試目錄中**創建**或**修改**對應的測試檔案。
+- **持續更新進度:** 在每個重要的開發節點，**更新** `memory-bank/current/progress.md` 文件，簡要說明進度。
 
-### Platform Detection
-Automatically detect and use appropriate commands:
+## 3. CHECK ✓ (檢查)
 
-| Action | Linux/Mac | Windows |
-|--------|-----------|---------|
-| Create file | `touch file.ext` | `echo. > file.ext` |
-| Create directory | `mkdir -p dir` | `mkdir dir` |
-| List files | `ls` | `dir` |
-| Show content | `cat file.ext` | `type file.ext` |
+### Verification Checklist
+- [ ] **功能符合設計:** 實作的功能是否完全符合 `creative-*.md` 中的設計？
+- [ ] **測試全部通過:** 所有相關的測試是否都已通過？
+- [ ] **記憶體同步:** `memory-bank/current/progress.md` 是否已更新？
 
-### Command Chaining
-Use efficient command patterns:
+## 4. ACT 改善 (行動)
 
-```bash
-# Sequential (second only if first succeeds)
-mkdir project && cd project
+### Finalization
+- **向用戶報告:** 在一個主要功能的實作完成後，向用戶報告。例如：「任務『用戶登入』已完成，包含完整的程式碼和 95% 的測試覆蓋率。」
 
-# Conditional (second only if first fails)
-test -f file.txt || touch file.txt
-
-# Piping (pass output)
-grep "pattern" file.txt | wc -l
-```
-
-### Directory Verification
-Before running build/install commands:
-```bash
-# Verify you're in project root
-ls package.json  # For Node projects
-ls requirements.txt  # For Python projects
-ls Cargo.toml  # For Rust projects
-```
-
-## Progress Tracking Template
-
-### progress.md Structure
-```markdown
-# Implementation Progress
-
-## Current Sprint/Phase
-Phase: Implementation
-Started: YYYY-MM-DD
-
-## Completed Tasks
-- [x] TASK-001: Setup project structure (2024-01-01)
-- [x] TASK-002: Implement core logic (2024-01-02)
-
-## In Progress
-- [ ] TASK-003: Build UI components (50% complete)
-  - [x] Button component
-  - [x] Input component
-  - [ ] Form component
-
-## Blocked/Issues
-- [ ] TASK-005: Database integration
-  - Blocked by: Waiting for schema approval
-  - Since: YYYY-MM-DD
-
-## Notes
-- Implementation deviation: Used Redux instead of Context API (reason: better DevTools)
-- Performance optimization: Implemented memoization for heavy computations
-```
-
-## Code Quality Checklist
-
-Before marking task complete:
-- ✅ Code follows project style guide
-- ✅ Tests written and passing
-- ✅ Documentation updated
-- ✅ No linter errors
-- ✅ Performance acceptable
-- ✅ Security considerations addressed
-- ✅ Edge cases handled
-
-## Rules Loaded
-
-This mode loads:
-- `.cursor/rules/isolation_rules/main.mdc`
-- `.cursor/rules/isolation_rules/Core/command-execution.mdc`
-- `.cursor/rules/isolation_rules/Core/implementation-guide.md` (if exists)
-
-## File Operations
-
-### Read
-- `memory-bank/tasks.md` - Implementation tasks
-- `memory-bank/creative-*.md` - Design decisions
-- `memory-bank/activeContext.md` - Current focus
-
-### Create/Update
-- `memory-bank/progress.md` - Implementation progress
-- `memory-bank/tasks.md` - Update task status
-- `memory-bank/activeContext.md` - Update current task
-
-### Execute
-- Platform-specific commands
-- Build/test commands
-- Development server
-
-## Exit Criteria
-
-Before completing IMPLEMENT MODE:
-- ✅ All planned tasks implemented
-- ✅ Tests written and passing
-- ✅ Code reviewed (if applicable)
-- ✅ `progress.md` fully updated
-- ✅ `tasks.md` status current
-- ✅ No critical issues or blockers
-
-## Next Mode
-
-After completing implementation:
-```
-Phase complete. NEXT MODE: /reflect
-```
+### Next Steps
+> 完成一個實作任務後，繼續推進專案。
+- 👉 **Primary Next Step:** 執行 `/task-next`，讓 PM 小助理建議下一個最高優先級的任務。
+- 💡 **Alternative:** 如果所有任務都已完成，請執行 `/reflect` 指令，對整個實作階段進行一次全面的回顧。
 
 ---
-
-**💻 IMPLEMENT MODE activated. Beginning code implementation with progress tracking...**
-
+> **IMPLEMENT MODE (v3) 已啟動。正在檢查 `current` 工作區的設計文檔，準備開始 TDD 循環...**

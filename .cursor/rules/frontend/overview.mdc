@@ -1,14 +1,5 @@
 ---
-description: "🌊 娜美管理的前端規則！亂花錢會被打！"
-globs:
-  - "app/**/*.tsx"
-  - "app/**/*.ts"
-  - "components/**/*.tsx"
-  - "components/**/*.ts"
-  - "src/**/*.jsx"
-  - "src/**/*.js"
-  - "pages/**/*.tsx"
-  - "pages/**/*.ts"
+description: Outlines architectural principles and best practices for frontend development, including state management, component structure, and styling.
 ---
 
 # 🎨 前端框架選擇

@@ -1,392 +1,70 @@
 ---
-description: API DESIGN - RESTful API design with resource modeling and endpoint planning
+description: API DESIGN - A guide for designing robust, RESTful APIs into the `current` memory workspace.
 ---
 
-# 🌐 API 設計助手
+# 🌐 API DESIGN GUIDE (v3)
 
-像娜美畫航海圖一樣精確地設計 API！
+> 像娜美畫航海圖一樣，遵循此指南，精確地設計出世界級的 API。
 
-## API 設計流程
+## 1. PLAN 🎯 (規劃)
 
-### 1. 📋 需求分析
+### Objective
+> 作為一個 AI Agent，遵循本指南中定義的最佳實踐，為給定的需求設計出一個符合 RESTful 原則、穩健、可擴展且易於使用的 API 規範。
 
-#### 資源識別
-- **主要資源**: [列出核心資源]
-- **子資源**: [相關的子資源]
-- **關聯關係**: [資源之間的關係]
+### Guiding Rules
+> 在執行 API 設計時，AI Agent 必須遵循以下規則：
+- **主要規則:** `.cursor/rules/principles/global.mdc`
+- **架構原則:** `.cursor/rules/backend/overview.mdc`
+- **設計模式:** (可選) `.cursor/rules/patterns/`
 
-#### 操作定義
-- **CRUD 操作**: Create, Read, Update, Delete
-- **特殊操作**: [業務特定的操作]
-- **批量操作**: [需要批量處理的場景]
+### Prerequisites Check
+> 在開始設計之前，請確保：
+- ✅ **需求已定義:** 一個清晰的需求文檔、使用者故事或 `memory-bank/current/projectbrief.md` 已經存在。
+- ✅ **資源已識別:** 核心的業務資源、屬性和它們之間的關係已經被初步識別。
+- ❌ **Failure Action:** 如果需求不清晰，AI **必須先提出問題**以澄清需求，而不是猜測。
 
-### 2. 🏗️ RESTful 設計
+## 2. DO 実行 (執行)
 
-#### 端點設計
-```yaml
-# 資源集合
-GET    /api/v1/resources          # 列表（支援分頁、篩選、排序）
-POST   /api/v1/resources          # 創建新資源
+### Core Process
+> 遵循一個系統化的 API 設計流程：
 
-# 單一資源
-GET    /api/v1/resources/:id      # 獲取詳情
-PUT    /api/v1/resources/:id      # 完整更新
-PATCH  /api/v1/resources/:id      # 部分更新
-DELETE /api/v1/resources/:id      # 刪除
+**Step 0: 健康檢查 (Health Check)**
+- **檢查輸入:** 驗證需求文檔是否清晰、無歧義。
+- **批判性思考:** API 設計的目標是解決實際問題。如果需求本身似乎會導致一個複雜或不合理的 API，AI 應提出質疑。
 
-# 子資源
-GET    /api/v1/resources/:id/sub-resources     # 子資源列表
-POST   /api/v1/resources/:id/sub-resources     # 創建子資源
+**Step 1: 記憶體互動 - 讀取 (Memory Interaction - Read)**
+- **讀取需求:** 從 `memory-bank/current/projectbrief.md`, `memory-bank/current/tasks.md`, 或其他需求來源文件中，完全理解業務目標和功能需求。
 
-# 特殊操作
-POST   /api/v1/resources/:id/action            # 執行特定動作
-GET    /api/v1/resources/search                # 搜尋
-POST   /api/v1/resources/bulk                  # 批量操作
-```
+**Step 2: 設計核心元素 (Design Core Elements)**
+- **端點設計 (Endpoint Design):** 根據資源和 CRUD 操作定義直觀的 URL 結構。
+- **數據格式 (Data Formatting):** 設計一致的 JSON 請求/回應格式。
+- **認證授權 (Auth & Authz):** 選擇合適的認證機制和權限控制策略。
 
-#### 查詢參數設計
-```typescript
-// 分頁
-?page=1&limit=20
+**Step 3: 設計進階特性 (Design Advanced Features)**
+- **資料驗證 (Data Validation):** 建立嚴格的輸入驗證 schema。
+- **版本管理 (Versioning):** 制定清晰的 API 版本策略。
+- **速率限制 (Rate Limiting):** 設計速率限制策略以防止濫用。
 
-// 排序
-?sort=created_at:desc,name:asc
+**Step 4: 記憶體互動 - 寫入 (Memory Interaction - Write)**
+- **產出設計文檔:** 將最終的 API 設計規範，以 OpenAPI (Swagger) 格式，**輸出到一個新的 `memory-bank/current/creative-api-design-[feature].md` 文件中**。
+- **更新上下文:** 在 `memory-bank/current/activeContext.md` 中註明 API 設計已完成。
 
-// 篩選
-?status=active&type=premium
+## 3. CHECK ✓ (檢查)
 
-// 搜尋
-?q=keyword
+### Verification Checklist
+> 在產出設計文檔後，AI 應自我檢查：
+- [ ] **一致性:** 所有端點的命名、數據格式和錯誤處理是否一致？
+- [ ] **記憶體同步:** `memory-bank/current/creative-api-design-[feature].md` 是否已成功創建？
 
-// 欄位選擇
-?fields=id,name,email
+## 4. ACT 改善 (行動)
 
-// 關聯載入
-?include=author,comments.user
-```
+### Finalization
+- **向用戶確認:** 報告 API 設計已完成並已存檔。例如：「API 設計已完成，詳細的 OpenAPI 規範已儲存至 `memory-bank/current/creative-api-design-[feature].md`。請您審閱。」
 
-### 3. 📦 請求/回應格式
+### Next Steps
+> API 設計是實施的藍圖。
+- 👉 **Primary Next Step:** 執行 `/implement` 指令，根據此 API 設計規範開始編寫後端程式碼。
+- 💡 **Alternative:** 執行 `/review-code` 指令，邀請另一位 AI Agent 或人類專家對此 API 設計文檔進行審查。
 
-#### 請求格式
-```typescript
-// 創建資源
-POST /api/v1/users
-{
-  "data": {
-    "type": "users",
-    "attributes": {
-      "email": "user@example.com",
-      "name": "John Doe",
-      "password": "SecurePassword123!"
-    }
-  }
-}
-
-// 更新資源
-PATCH /api/v1/users/123
-{
-  "data": {
-    "type": "users",
-    "id": "123",
-    "attributes": {
-      "name": "Jane Doe"
-    }
-  }
-}
-```
-
-#### 成功回應
-```typescript
-// 單一資源
-{
-  "data": {
-    "type": "users",
-    "id": "123",
-    "attributes": {
-      "email": "user@example.com",
-      "name": "John Doe",
-      "created_at": "2024-01-01T00:00:00Z"
-    },
-    "relationships": {
-      "posts": {
-        "data": [
-          { "type": "posts", "id": "1" },
-          { "type": "posts", "id": "2" }
-        ]
-      }
-    }
-  },
-  "included": [], // 包含的關聯資源
-  "meta": {
-    "timestamp": "2024-01-01T00:00:00Z"
-  }
-}
-
-// 資源列表
-{
-  "data": [...],
-  "meta": {
-    "pagination": {
-      "page": 1,
-      "limit": 20,
-      "total": 100,
-      "pages": 5
-    }
-  },
-  "links": {
-    "first": "/api/v1/users?page=1",
-    "last": "/api/v1/users?page=5",
-    "prev": null,
-    "next": "/api/v1/users?page=2"
-  }
-}
-```
-
-#### 錯誤回應
-```typescript
-{
-  "errors": [
-    {
-      "id": "error-uuid",
-      "status": "422",
-      "code": "VALIDATION_ERROR",
-      "title": "Validation Failed",
-      "detail": "The email field is required",
-      "source": {
-        "pointer": "/data/attributes/email"
-      },
-      "meta": {
-        "timestamp": "2024-01-01T00:00:00Z"
-      }
-    }
-  ]
-}
-```
-
-### 4. 🔐 認證授權
-
-#### 認證機制
-```typescript
-// JWT Bearer Token
-headers: {
-  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIs...'
-}
-
-// API Key
-headers: {
-  'X-API-Key': 'your-api-key-here'
-}
-
-// OAuth 2.0
-// 1. 獲取授權碼
-GET /oauth/authorize?
-  response_type=code&
-  client_id=CLIENT_ID&
-  redirect_uri=REDIRECT_URI&
-  scope=read:user
-
-// 2. 交換 Token
-POST /oauth/token
-{
-  "grant_type": "authorization_code",
-  "code": "AUTH_CODE",
-  "client_id": "CLIENT_ID",
-  "client_secret": "CLIENT_SECRET"
-}
-```
-
-#### 權限控制
-```typescript
-// RBAC (角色基礎存取控制)
-{
-  "user": {
-    "id": "123",
-    "roles": ["admin", "editor"],
-    "permissions": [
-      "users:read",
-      "users:write",
-      "posts:*"
-    ]
-  }
-}
-
-// 權限檢查中間件
-function authorize(permission) {
-  return (req, res, next) => {
-    if (!req.user.permissions.includes(permission)) {
-      return res.status(403).json({
-        error: "Insufficient permissions"
-      })
-    }
-    next()
-  }
-}
-```
-
-### 5. 📝 資料驗證
-
-#### Schema 驗證
-```typescript
-import { z } from 'zod'
-
-// 使用者創建 Schema
-const createUserSchema = z.object({
-  email: z.string().email(),
-  name: z.string().min(2).max(100),
-  password: z.string()
-    .min(8)
-    .regex(/[A-Z]/, 'Must contain uppercase')
-    .regex(/[a-z]/, 'Must contain lowercase')
-    .regex(/[0-9]/, 'Must contain number'),
-  age: z.number().int().min(0).max(150).optional(),
-  role: z.enum(['user', 'admin', 'moderator']).default('user')
-})
-
-// 驗證中間件
-const validate = (schema) => async (req, res, next) => {
-  try {
-    req.body = await schema.parseAsync(req.body)
-    next()
-  } catch (error) {
-    res.status(422).json({
-      errors: error.errors
-    })
-  }
-}
-```
-
-### 6. 📊 API 版本管理
-
-#### 版本策略
-```typescript
-// URL 路徑版本
-/api/v1/users
-/api/v2/users
-
-// Header 版本
-headers: {
-  'Accept': 'application/vnd.api+json;version=2'
-}
-
-// 查詢參數版本
-/api/users?version=2
-```
-
-#### 向後相容
-```typescript
-// 版本轉換中間件
-function versionAdapter(req, res, next) {
-  const version = req.headers['api-version'] || 'v1'
-
-  if (version === 'v1') {
-    // 轉換 v1 格式到 v2
-    if (req.body.username) {
-      req.body.name = req.body.username
-      delete req.body.username
-    }
-  }
-
-  next()
-}
-```
-
-### 7. 🚦 Rate Limiting
-
-```typescript
-const rateLimit = {
-  // 基本限制
-  windowMs: 15 * 60 * 1000, // 15 分鐘
-  max: 100, // 最多 100 個請求
-
-  // 動態限制
-  keyGenerator: (req) => {
-    return req.user?.id || req.ip
-  },
-
-  // 自定義回應
-  handler: (req, res) => {
-    res.status(429).json({
-      error: 'Too many requests',
-      retryAfter: req.rateLimit.resetTime
-    })
-  },
-
-  // Headers
-  standardHeaders: true,
-  legacyHeaders: false
-}
-```
-
-### 8. 📚 API 文檔
-
-#### OpenAPI/Swagger 規範
-```yaml
-openapi: 3.0.0
-info:
-  title: API 名稱
-  version: 1.0.0
-  description: API 描述
-
-paths:
-  /api/v1/users:
-    get:
-      summary: 獲取用戶列表
-      parameters:
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 1
-      responses:
-        200:
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/User'
-
-components:
-  schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-        name:
-          type: string
-```
-
-## 輸出格式
-
-### API 規範文檔
-```markdown
-# API: [資源名稱]
-
-## 端點清單
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /api/v1/resources | 獲取列表 |
-| POST | /api/v1/resources | 創建資源 |
-
-## 請求/回應範例
-[具體的範例]
-
-## 錯誤碼
-| Code | Description |
-|------|-------------|
-| 400 | Bad Request |
-| 401 | Unauthorized |
-
-## 認證方式
-[認證說明]
-```
-
-### 實作程式碼
-生成完整的 Controller/Service/Model 程式碼
+---
+> **API DESIGN GUIDE (v3) 已載入。AI Agent 將遵循此指南進行設計...**

@@ -1,288 +1,71 @@
 ---
-description: OPTIMIZE - Performance analysis and optimization for frontend and backend
+description: OPTIMIZE - Data-driven performance analysis and optimization in the `current` workspace.
 ---
 
-# ⚡ 效能優化
+# ⚡ OPTIMIZE MODE (v3)
 
-像索隆的三刀流一樣快速！讓程式碼跑得飛快！
+> 像索隆的三刀流一樣，基於數據，精準、快速地斬斷效能瓶頸。
 
-## 效能分析
+## 1. PLAN 🎯 (規劃)
 
-### 1. 🔍 效能瓶頸識別
+### Objective
+> 遵循「測量-識別-優化-驗證」的循環，系統性地解決效能問題，並**寫入**一份包含前後對比數據的效能報告，以證明優化的有效性。
 
-#### 前端效能檢查
-- [ ] **首次載入時間 (FCP)**：目標 < 2s
-- [ ] **可互動時間 (TTI)**：目標 < 3.5s
-- [ ] **最大內容繪製 (LCP)**：目標 < 2.5s
-- [ ] **累積版面配置偏移 (CLS)**：目標 < 0.1
-- [ ] **首次輸入延遲 (FID)**：目標 < 100ms
+### Guiding Rules
+> 在執行此指令時，AI Agent 必須遵循以下規則：
+- **主要規則:** `.cursor/rules/principles/global.mdc`
+- **架構原則:** `.cursor/rules/backend/overview.mdc` 或 `.cursor/rules/frontend/overview.mdc`
+- **測試要求:** `.cursor/rules/testing/overview.mdc` (確保優化不破壞功能)
+- **核心隔離:** `.cursor/rules/isolation_rules/main.mdc`
 
-#### 後端效能檢查
-- [ ] **API 回應時間**：P50 < 100ms, P95 < 500ms
-- [ ] **資料庫查詢時間**：< 50ms
-- [ ] **記憶體使用**：< 512MB
-- [ ] **CPU 使用率**：< 70%
+### Prerequisites Check
+> 在開始優化之前，請確保：
+- ✅ **目標已量化:** 有一個清晰、可量化的效能目標 (e.g., "將 P95 延遲從 800ms 降至 300ms 以下")。
+- ✅ **基準已存在:** 已有一份可靠的效能基準測試報告，可能儲存在 `memory-bank/current/` 中。
+- ❌ **Failure Action:** 如果目標模糊或沒有基準數據，AI **必須拒絕優化**，並建議：「我們需要先建立效能基準。我應該先編寫一個負載測試腳本來測量當前的 API 延遲嗎？」
 
-### 2. 📊 效能測量工具
+## 2. DO 実行 (執行)
 
-```javascript
-// 前端效能測量
-const measurePerformance = () => {
-  // Web Vitals
-  const CLS = /* 累積版面配置偏移 */
-  const FID = /* 首次輸入延遲 */
-  const LCP = /* 最大內容繪製 */
+### Core Process
+> 遵循一個嚴格的、數據驅動的優化循環：
 
-  // 自定義指標
-  const customMetrics = {
-    apiCallDuration: [],
-    renderTime: [],
-    bundleSize: 0
-  }
+**Step 0: 健康檢查 (Health Check)**
+- **檢查目標和基準:** 驗證效能目標是否具體、可衡量，且基準報告是否可信。
+- **批判性思考:** 優化是權衡的藝術。AI 應思考目標是否現實，並思考潛在的副作用，例如：「追求極致的低延遲可能會增加伺服器成本或降低數據一致性。我們應該在哪個指標上做權衡？」
 
-  return { CLS, FID, LCP, customMetrics }
-}
+**Step 1: 記憶體互動 - 讀取 (Memory Interaction - Read)**
+- **讀取目標:** 從 `memory-bank/current/tasks.md` 讀取效能優化目標。
+- **讀取基準報告:** 從 `memory-bank/current/perf-report-[baseline-date].md` 讀取詳細的基準數據。
+- **讀取相關程式碼:** 根據基準報告中指出的瓶頸，讀取相關的產品程式碼。
 
-// 後端效能測量
-const performanceMiddleware = (req, res, next) => {
-  const start = Date.now()
+**Step 2: 假設與實施 (Hypothesize & Implement)**
+- **提出假設:** 針對瓶頸，提出一個具體的優化假設。
+- **實施優化:** **修改**產品程式碼以實現該優化。
 
-  res.on('finish', () => {
-    const duration = Date.now() - start
-    console.log(`${req.method} ${req.url}: ${duration}ms`)
-  })
+**Step 3: 驗證與測量 (Verify & Measure)**
+- **功能驗證:** 運行所有單元測試和整合測試，確保優化沒有破壞任何現有功能。
+- **效能驗證:** 在與基準測試**完全相同**的環境下，重新運行效能測試。
 
-  next()
-}
-```
+**Step 4: 記憶體互動 - 寫入 (Memory Interaction - Write)**
+- **寫入效能報告:** **創建**一份新的效能報告 `memory-bank/current/perf-report-[optimization-date].md`。此報告**必須**包含優化目標、措施、以及**優化前後的數據對比表**。
 
-### 3. 🚀 優化策略
+## 3. CHECK ✓ (檢查)
 
-#### 前端優化
+### Verification Checklist
+- [ ] **目標是否達成:** 優化後的指標是否達到了預設的目標？
+- [ ] **功能無迴歸:** 所有測試是否都已通過？
+- [ ] **報告已生成:** 是否已在 `memory-bank/current` 中創建了包含前後對比數據的效能報告？
 
-##### Bundle 優化
-```javascript
-// Code Splitting
-const LazyComponent = lazy(() => import('./HeavyComponent'))
+## 4. ACT 改善 (行動)
 
-// Tree Shaking
-import { specific } from 'large-library'  // ✅
-// import * as all from 'large-library'  // ❌
+### Finalization
+- **向用戶確認權衡:** 在提交一個涉及重要權衡的優化之前，AI **必須**向用戶確認。
+- **提交程式碼:** 在用戶確認後，將優化程式碼和新的效能報告提交到版本控制系統。
 
-// 動態導入
-if (condition) {
-  const module = await import('./conditional-module')
-}
-```
+### Next Steps
+> 效能優化是一個持續的過程。
+- 👉 **Primary Next Step:** 如果仍有未達標的效能指標，可以執行 `/task-next` 來建議下一個要優化的點。
+- 💡 **Alternative:** 將新的效能測試腳本整合到 CI/CD 流程中，建立效能迴歸監控。
 
-##### 渲染優化
-```javascript
-// React.memo 防止不必要重渲染
-const MemoizedComponent = memo(Component, (prev, next) => {
-  return prev.id === next.id
-})
-
-// useMemo 快取昂貴計算
-const expensiveValue = useMemo(() => {
-  return heavyCalculation(data)
-}, [data])
-
-// useCallback 快取函數
-const memoizedCallback = useCallback(() => {
-  doSomething(a, b)
-}, [a, b])
-
-// 虛擬列表
-import { FixedSizeList } from 'react-window'
-```
-
-##### 資源優化
-```javascript
-// 圖片優化
-<Image
-  src="/hero.webp"  // WebP 格式
-  loading="lazy"     // 延遲載入
-  decoding="async"   // 非同步解碼
-  sizes="(max-width: 768px) 100vw, 50vw"
-  srcSet="..."       // 響應式圖片
-/>
-
-// 字體優化
-<link
-  rel="preload"
-  href="/fonts/main.woff2"
-  as="font"
-  crossOrigin="anonymous"
-/>
-```
-
-#### 後端優化
-
-##### 資料庫優化
-```sql
--- 建立索引
-CREATE INDEX idx_user_email ON users(email);
-CREATE INDEX idx_post_user_date ON posts(user_id, created_at);
-
--- 查詢優化
--- ❌ N+1 問題
-SELECT * FROM users;
--- 然後對每個用戶
-SELECT * FROM posts WHERE user_id = ?;
-
--- ✅ 使用 JOIN
-SELECT u.*, p.*
-FROM users u
-LEFT JOIN posts p ON u.id = p.user_id;
-```
-
-##### 快取策略
-```javascript
-// Redis 快取
-const cacheMiddleware = async (req, res, next) => {
-  const key = `cache:${req.url}`
-  const cached = await redis.get(key)
-
-  if (cached) {
-    return res.json(JSON.parse(cached))
-  }
-
-  // 儲存原始 send 方法
-  const originalSend = res.json
-  res.json = function(data) {
-    redis.setex(key, 3600, JSON.stringify(data))
-    originalSend.call(this, data)
-  }
-
-  next()
-}
-
-// 記憶體快取
-const memCache = new Map()
-const CACHE_TTL = 60000 // 1 分鐘
-
-function memoize(fn) {
-  return async (...args) => {
-    const key = JSON.stringify(args)
-    const cached = memCache.get(key)
-
-    if (cached && Date.now() - cached.time < CACHE_TTL) {
-      return cached.value
-    }
-
-    const result = await fn(...args)
-    memCache.set(key, { value: result, time: Date.now() })
-    return result
-  }
-}
-```
-
-##### 並發優化
-```javascript
-// 使用 Worker Threads
-const { Worker } = require('worker_threads')
-
-function runWorker(data) {
-  return new Promise((resolve, reject) => {
-    const worker = new Worker('./heavy-task.js', {
-      workerData: data
-    })
-
-    worker.on('message', resolve)
-    worker.on('error', reject)
-  })
-}
-
-// 批量處理
-async function batchProcess(items, batchSize = 100) {
-  const results = []
-
-  for (let i = 0; i < items.length; i += batchSize) {
-    const batch = items.slice(i, i + batchSize)
-    const batchResults = await Promise.all(
-      batch.map(item => processItem(item))
-    )
-    results.push(...batchResults)
-  }
-
-  return results
-}
-```
-
-### 4. 📈 效能監控
-
-#### 設定監控指標
-```javascript
-// Prometheus 指標
-const promClient = require('prom-client')
-
-const httpDuration = new promClient.Histogram({
-  name: 'http_request_duration_seconds',
-  help: 'Duration of HTTP requests in seconds',
-  labelNames: ['method', 'route', 'status_code']
-})
-
-// 記錄指標
-app.use((req, res, next) => {
-  const start = Date.now()
-
-  res.on('finish', () => {
-    const duration = (Date.now() - start) / 1000
-    httpDuration
-      .labels(req.method, req.route?.path || req.url, res.statusCode)
-      .observe(duration)
-  })
-
-  next()
-})
-```
-
-### 5. ✅ 優化檢查清單
-
-#### 必要優化
-- [ ] 移除未使用的程式碼
-- [ ] 壓縮 JavaScript/CSS
-- [ ] 優化圖片格式和大小
-- [ ] 啟用 Gzip/Brotli 壓縮
-- [ ] 設定適當的快取標頭
-
-#### 進階優化
-- [ ] 實施 Service Worker
-- [ ] 使用 CDN
-- [ ] 資料庫連線池
-- [ ] 實施 Rate Limiting
-- [ ] 使用 HTTP/2 或 HTTP/3
-
-#### 監控設定
-- [ ] 設定 APM 工具
-- [ ] 配置錯誤追蹤
-- [ ] 建立效能儀表板
-- [ ] 設定警報閾值
-
-## 輸出報告格式
-
-### 效能基準
-```markdown
-## Before Optimization
-- FCP: X.Xs
-- LCP: X.Xs
-- TTI: X.Xs
-- Bundle Size: XXX KB
-- API Response: XXXms (P95)
-
-## After Optimization
-- FCP: X.Xs (↓ XX%)
-- LCP: X.Xs (↓ XX%)
-- TTI: X.Xs (↓ XX%)
-- Bundle Size: XXX KB (↓ XX%)
-- API Response: XXXms (↓ XX%)
-```
-
-### 實施的優化
-1. ✅ [優化項目 1] - 改善 XX%
-2. ✅ [優化項目 2] - 改善 XX%
-3. ✅ [優化項目 3] - 改善 XX%
-
-### 建議的後續優化
-1. [建議 1] - 預期改善 XX%
-2. [建議 2] - 預期改善 XX%
+---
+> **OPTIMIZE MODE (v3) 已啟動。正在檢查 `current` 工作區的效能目標和基準數據...**

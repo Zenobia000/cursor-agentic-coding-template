@@ -1,13 +1,5 @@
 ---
-description: "⚔️ 索隆的後端規則！三刀流架構，絕不迷路！"
-globs:
-  - "api/**/*.ts"
-  - "api/**/*.js"
-  - "server/**/*.ts"
-  - "server/**/*.js"
-  - "backend/**/*.py"
-  - "src/api/**/*"
-  - "src/server/**/*"
+description: Outlines architectural principles and best practices for backend development, including API design, data persistence, and service-to-service communication.
 ---
 
 # 🏗️ 後端架構

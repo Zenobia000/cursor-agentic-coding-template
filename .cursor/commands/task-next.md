@@ -1,81 +1,66 @@
 ---
-description: TASK NEXT - Prioritize and select next task based on value and dependencies
+description: TASK NEXT - Get a PM briefing on the next most strategic tasks from the `current` workspace.
 ---
 
-# ⏭️ 下一步任務
+# 👨‍💼 TASK NEXT (PM Assistant v3)
 
-喂！要開始下一個冒險了！挑出最重要的任務！
+> 您的專案經理小助手已上線。為您過濾上下文噪音，分析戰況，並從多個策略角度建議下一步的最佳行動。
 
-## 任務選擇
+## 1. PLAN 🎯 (規劃)
 
-### 1. 📊 當前狀態評估
-請分析：
-- 目前完成了什麼？
-- 還剩下什麼？
-- 有什麼阻礙？
+### Objective
+> 在您需要重新聚焦時，為您提供一份關於當前 `memory-bank/current/tasks.md` 的摘要簡報，並從多個策略角度建議接下來應該執行的任務。此指令是一個**只讀**分析器，旨在幫助決策，**不會修改** `tasks.md`。
 
-### 2. 🎯 下一步選擇標準
+### Guiding Rules
+> 在執行此指令時，AI Agent 必須遵循以下規則：
+- **主要規則:** `.cursor/rules/principles/global.mdc`
+- **規劃與追蹤:** `.cursor/rules/process/planning-process.md` 和 `.cursor/rules/process/task-tracking.md`
+- **核心隔離:** `.cursor/rules/isolation_rules/main.mdc`
 
-#### 優先級評分（1-10）
-- **業務價值**: 對用戶的影響有多大？
-- **技術依賴**: 是否阻擋其他任務？
-- **風險程度**: 延遲會造成什麼問題？
-- **實作難度**: 需要多少時間？
-- **資源可用性**: 現在能不能做？
+### Prerequisites Check
+> 在獲取簡報之前，請確保：
+- ✅ **`tasks.md` 存在:** `memory-bank/current/tasks.md` 是您專案的「唯一真相來源」。
+- ❌ **Failure Action:** 如果 `tasks.md` 不存在，AI **必須**建議用戶先運行 `/van` 來初始化專案。
 
-### 3. 🚀 建議的下一步
+## 2. DO 実行 (執行)
 
-#### 推薦任務
-```markdown
-📌 任務名稱：[具體任務]
-⏱️ 預估時間：[X 小時]
-🎯 目標：[明確的完成標準]
-⚠️ 風險：[潛在問題]
-```
+### Core Process
+> PM 小助手將為您執行以下分析流程：
 
-#### 具體步驟
-1. [ ] 步驟 1：準備工作
-2. [ ] 步驟 2：核心實作
-3. [ ] 步驟 3：測試驗證
-4. [ ] 步驟 4：文檔更新
+**Step 0: 健康檢查 (Health Check)**
+- **檢查 `tasks.md` 狀態:** 驗證 `memory-bank/current/tasks.md` 是否存在、有效，且包含待辦任務。
+- **批判性思考:** 如果所有任務都已完成，AI 應報告：「恭喜！所有任務都已完成。建議執行 `/reflect` 進行復盤。」 如果沒有可執行的任務（所有 `pending` 任務都被阻塞），AI 應報告：「目前沒有可立即開始的新任務，我們需要先完成正在進行中的『XXX』任務。」
 
-### 4. 📋 備選任務
-如果主要任務被阻塞，可以做：
-- 備選 1：[任務描述] - 原因
-- 備選 2：[任務描述] - 原因
-- 備選 3：[任務描述] - 原因
+**Step 1: 記憶體互動 - 讀取 (Memory Interaction - Read)**
+- **讀取任務列表:** 完整**讀取**並解析 `memory-bank/current/tasks.md` 的內容。
 
-### 5. ⚡ 快速決策矩陣
+**Step 2: 多維度評估 (Multi-dimensional Evaluation)**
+- **識別候選者:** 找出所有狀態為 `pending` 且其依賴項均已 `completed` 的可執行任務。
+- **評估視角:** 從以下 PM 視角對每個候選任務進行評估：
+    *   **👑 關鍵路徑 (Critical Path):** 哪個任務是後續最多待辦任務的阻塞點？
+    *   **💎 最高價值 (Highest Value):** 哪個任務最貼近 `projectbrief.md` 中定義的核心目標？
+    *   **⚡️ 快速取勝 (Quick Win):** 哪個任務預估工作量最小，可以快速完成以建立動能？
+    *   **🛡️ 風險緩解 (Risk Mitigation):** 哪個任務能解決最大的技術或業務不確定性？
 
-| 任務 | 價值 | 難度 | 建議 |
-|-----|------|------|------|
-| 任務 A | 高 | 低 | ✅ 立即執行 |
-| 任務 B | 高 | 高 | 🤔 需要規劃 |
-| 任務 C | 低 | 低 | 📝 空閒時做 |
-| 任務 D | 低 | 高 | ❌ 暫時跳過 |
+**Step 3: 記憶體互動 - 寫入 (Memory Interaction - Write)**
+- **輸出 PM 簡報:** 將分析結果彙總成一份清晰、結構化的「PM 簡報」，作為**輸出**直接呈現給用戶。**此指令不修改 `tasks.md`。**
+- **(可選) 更新上下文:** 可以在 `memory-bank/current/activeContext.md` 中輕量地記錄一次「PM 簡報已提供」。
 
-## 輸出格式
+## 3. CHECK ✓ (檢查)
 
-### 決定的下一步
-**任務**：[明確的任務名稱]
-**原因**：[為什麼選這個]
-**目標**：[完成的定義]
-**時間**：[預估工時]
+### Verification Checklist
+- [ ] **簡報是否清晰:** 輸出的 PM 簡報是否易於理解，並清楚解釋了每個建議背後的原因？
+- [ ] **只讀原則:** AI 是否確保了沒有修改 `tasks.md`？
 
-### 行動計劃
-```bash
-# Step 1: 環境準備
-[具體指令或動作]
+## 4. ACT 改善 (行動)
 
-# Step 2: 開始實作
-[具體指令或動作]
+### Finalization
+- **等待用戶決策:** AI 的任務在提供簡報後即完成，等待用戶做出最終決策。
 
-# Step 3: 驗證結果
-[具體指令或動作]
-```
+### Next Steps
+> AI 將根據用戶的決策，進入相應的模式。
+- 👉 **Primary Next Step:** 用戶選擇一個建議後，AI 應準備執行 `/creative` 或 `/implement` 指令，來處理被選中的任務。
+- 💡 **Alternative:** 如果用戶認為所有建議都不合適，AI 應建議：「看起來我們的計畫可能需要調整。建議執行 `/plan` 來重新審視和分解任務。」
 
-### 成功標準
-- [ ] 功能正常運作
-- [ ] 測試通過
-- [ ] 沒有破壞現有功能
-- [ ] 文檔已更新
+---
+> **TASK NEXT (PM Assistant v3) 已啟動。正在檢查 `current` 工作區的健康狀態，準備提供任務簡報...**

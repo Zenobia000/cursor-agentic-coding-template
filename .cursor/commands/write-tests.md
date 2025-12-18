@@ -1,161 +1,74 @@
 ---
-description: WRITE TESTS - Test strategy and implementation for unit, integration, and E2E tests
+description: WRITE TESTS - Write comprehensive, high-quality tests for a given piece of code in the `current` workspace.
 ---
 
-# 🧪 測試撰寫
+# 🧪 WRITE TESTS MODE (v3)
 
-像烏索普的彈弓一樣精準的測試！
+> 像烏索普的彈弓一樣，編寫精準、可靠的測試，確保程式碼的每一個角落都堅不可摧。
 
-## 測試策略
+## 1. PLAN 🎯 (規劃)
 
-### 1. 📋 測試範圍分析
-分析需要測試的內容：
-- **核心功能**: 主要業務邏輯
-- **邊界條件**: 極端值、空值、異常輸入
-- **錯誤處理**: 異常情況、錯誤路徑
-- **整合點**: API、資料庫、第三方服務
+### Objective
+> 為一個特定的功能或程式碼模組，設計並**寫入**一組全面、有效的測試，以鎖定其行為、防止迴歸，並作為可執行的文檔。
 
-### 2. 🎯 測試類型
+### Guiding Rules
+> 在執行此指令時，AI Agent 必須遵循以下規則：
+- **主要規則:** `.cursor/rules/principles/global.mdc`
+- **測試聖經:** `.cursor/rules/testing/overview.mdc`
+- **特定框架規則:** `.cursor/rules/backend/overview.mdc` 或 `.cursor/rules/frontend/overview.mdc`
+- **核心隔離:** `.cursor/rules/isolation_rules/main.mdc`
 
-#### 單元測試 (Unit Tests)
-```typescript
-describe('FunctionName', () => {
-  it('should handle normal case', () => {
-    // Arrange
-    const input = ...
+### Prerequisites Check
+> 在開始編寫測試之前，請確保：
+- ✅ **程式碼已存在:** 需要被測試的產品程式碼已經存在。
+- ✅ **行為已定義:** 該程式碼的預期行為是清晰的 (來自 `memory-bank/current/tasks.md` 或用戶說明)。
+- ❌ **Failure Action:** 如果不清楚要測試什麼，AI **必須**首先提問：「為了編寫有意義的測試，我需要了解 `my_function` 的預期行為。當輸入為 `null` 時，它應該拋出錯誤還是返回一個默認值？」
 
-    // Act
-    const result = functionName(input)
+## 2. DO 実行 (執行)
 
-    // Assert
-    expect(result).toBe(expected)
-  })
+### Core Process
+> 遵循一個策略性的、由外向內的測試編寫流程：
 
-  it('should handle edge case', () => {
-    // 邊界條件測試
-  })
+**Step 0: 健康檢查 (Health Check)**
+- **檢查測試環境:** 驗證專案的測試框架是否已安裝且可以正常運行。
+- **批判性思考:** 我應該寫哪種類型的測試？如果這是一個複雜的用戶流程，一個高層的整合測試可能比單元測試更有價值。如果這是一個純粹的演算法，單元測試則是最佳選擇。AI 應能判斷並提出策略。
 
-  it('should throw error for invalid input', () => {
-    // 錯誤處理測試
-  })
-})
-```
+**Step 1: 記憶體互動 - 讀取 (Memory Interaction - Read)**
+- **讀取需求:** 從 `memory-bank/current/tasks.md` 或 `creative-*.md` 讀取功能的驗收條件。
+- **讀取產品程式碼:** 仔細閱讀需要被測試的函數或模組的源碼。
 
-#### 整合測試 (Integration Tests)
-```typescript
-describe('API Endpoint', () => {
-  it('should return correct response', async () => {
-    const response = await request(app)
-      .get('/api/endpoint')
-      .expect(200)
+**Step 2: 測試策略與案例設計 (Strategy & Case Design)**
+- **選擇測試類型:** 決定編寫單元測試、整合測試還是 E2E 測試。
+- **設計測試案例:** 系統性地設計測試案例，確保覆蓋：
+    - **Happy Path:** 正常、預期的輸入和流程。
+    - **Sad Paths:** 已知的錯誤路徑、異常輸入 (如 `null`)。
+    - **Edge Cases:** 邊界值 (如 0, -1, 空字串)。
 
-    expect(response.body).toMatchObject({
-      // 預期結構
-    })
-  })
-})
-```
+**Step 3: 記憶體互動 - 寫入 (Memory Interaction - Write)**
+- **確認策略 (Confirm):** 對於一個較大的模組，在開始編碼前，可以向用戶**確認**測試策略。例如：「我計劃為 `UserService` 編寫 5 個單元測試和 1 個整合測試。這個方案可以嗎？」
+- **編寫測試程式碼:** 在得到用戶同意後，**創建**或**修改**對應的測試文件 (e.g., `*.test.js`, `test_*.py`)。
 
-#### E2E 測試 (End-to-End Tests)
-```typescript
-test('user flow', async ({ page }) => {
-  await page.goto('/')
-  await page.click('button[data-testid="login"]')
-  await page.fill('input[name="email"]', 'test@example.com')
-  await page.fill('input[name="password"]', 'password')
-  await page.click('button[type="submit"]')
+**Step 4: 執行與迭代 (Run & Iterate)**
+- **運行測試:** 執行新編寫的測試，確保它們能夠正確地運行。
+- **迭代:** 根據測試結果，可能需要返回去修改測試程式碼或產品程式碼。
 
-  await expect(page).toHaveURL('/dashboard')
-})
-```
+## 3. CHECK ✓ (檢查)
 
-### 3. 📊 測試案例設計
+### Verification Checklist
+- [ ] **測試已創建:** 新的測試文件是否已成功寫入到正確的測試目錄中？
+- [ ] **測試可運行:** 新增的測試是否能被測試運行器發現並成功執行？
+- [ ] **命名清晰:** 測試的描述是否清晰地說明了它在「Given-When-Then」下的行為？
 
-#### 測試矩陣
-| 輸入類型 | 預期結果 | 優先級 |
-|---------|---------|--------|
-| 正常輸入 | 正確輸出 | 高 |
-| 空值 | 錯誤處理 | 高 |
-| 邊界值 | 正確處理 | 中 |
-| 異常格式 | 錯誤訊息 | 中 |
-| 極大值 | 效能正常 | 低 |
+## 4. ACT 改善 (行動)
 
-### 4. 🔧 Mock 與 Stub
+### Finalization
+- **報告結果:** 向用戶報告測試編寫已完成，並提供測試結果的摘要。
+- **提交程式碼:** 將新的測試文件提交到版本控制系統。
 
-```typescript
-// Mock 外部相依
-jest.mock('./database', () => ({
-  query: jest.fn().mockResolvedValue(mockData)
-}))
+### Next Steps
+> 測試是信心的來源。
+- 👉 **Primary Next Step:** 如果測試是開發任務的一部分，現在可以執行 `/task-next` 來獲取下一個任務。
+- 💡 **Alternative:** 如果在編寫測試的過程中發現了 Bug，應立即切換到 `/debug` 模式。
 
-// Spy 函數呼叫
-const spy = jest.spyOn(module, 'method')
-
-// Stub 時間
-jest.useFakeTimers()
-jest.setSystemTime(new Date('2024-01-01'))
-```
-
-### 5. 📈 測試品質指標
-
-#### 覆蓋率目標
-- 語句覆蓋率 (Statement): > 80%
-- 分支覆蓋率 (Branch): > 75%
-- 函數覆蓋率 (Function): > 90%
-- 行覆蓋率 (Line): > 80%
-
-#### 測試金字塔
-```
-      /\
-     /E2E\     (10%)
-    /------\
-   /Integration\ (30%)
-  /------------\
- / Unit Tests   \ (60%)
-/________________\
-```
-
-### 6. ✅ 測試檢查清單
-
-#### 測試完整性
-- [ ] Happy path 測試
-- [ ] Sad path 測試
-- [ ] Edge cases 測試
-- [ ] 異常處理測試
-
-#### 測試品質
-- [ ] 測試獨立性（不依賴順序）
-- [ ] 測試可重複性
-- [ ] 測試速度合理
-- [ ] 測試名稱描述清楚
-
-#### 測試維護
-- [ ] 避免脆弱測試
-- [ ] 適當的 mock/stub
-- [ ] 清理測試資料
-- [ ] 文檔說明複雜測試
-
-### 7. 🚀 測試執行
-
-```bash
-# 執行所有測試
-npm test
-
-# 執行特定測試
-npm test -- --grep "specific test"
-
-# 測試覆蓋率
-npm run test:coverage
-
-# Watch 模式
-npm run test:watch
-```
-
-## 輸出格式
-
-生成的測試應該：
-1. 遵循 AAA 模式 (Arrange-Act-Assert)
-2. 使用描述性的測試名稱
-3. 包含正向和負向測試案例
-4. 有適當的錯誤訊息
-5. 可獨立執行
+---
+> **WRITE TESTS MODE (v3) 已啟動。正在檢查 `current` 工作區的測試環境，準備為您的程式碼建立品質防線...**
